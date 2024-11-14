@@ -1,0 +1,53 @@
+class RestaurantMenu:
+    def __init__(self):
+        self.menu = {
+            'Pizza Margherita': 8.99,
+            'Spaghetti Carbonara': 12.99,
+            'Caesar Salad': 6.50,
+            'Cheeseburger': 9.99,
+            'French Fries': 3.50,
+            'Tiramisu': 5.99,
+            'Water': 1.50,
+            'Coca-Cola': 2.50,
+            'Beer': 4.00
+        }
+        self.order = []
+
+    def display_menu(self):
+        print("Welcome to Our Restaurant!")
+        print("Here is the menu:\n")
+        for item, price in self.menu.items():
+            print(f"{item}: ${price:.2f}")
+        print("\n")
+
+    def take_order(self):
+        while True:
+            choice = input("Enter the item you want to order or type 'done' to finish: ").strip()
+            if choice.lower() == 'done':
+                break
+            elif choice in self.menu:
+                self.order.append(choice)
+                print(f"{choice} added to your order.")
+            else:
+                print("Sorry, we don't have that item on the menu.")
+    
+    def show_order(self):
+        if not self.order:
+            print("You haven't ordered anything yet!")
+        else:
+            print("\nYour Order:")
+            total = 0
+            for item in self.order:
+                print(f"{item}: ${self.menu[item]:.2f}")
+                total += self.menu[item]
+            print(f"\nTotal: ${total:.2f}")
+    
+    def run(self):
+        self.display_menu()
+        self.take_order()
+        self.show_order()
+
+
+if __name__ == "__main__":
+    restaurant = RestaurantMenu()
+    restaurant.run()
